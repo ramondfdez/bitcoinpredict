@@ -1,10 +1,11 @@
 # Bitcoin price prediction
 
-[Imagen bitcoin]
+![alt text](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmvhicMrnP7YMn7gbCYrqfKW0u80xtgdL2yMTk2Fv085JGLuSI6Q&s)
+
 
 ## Description
 
-Predicts the bitcoin value using machine learning features.
+Predicts the Bitcoin value using machine learning features.
 
 
 ## Getting Started
