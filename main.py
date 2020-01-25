@@ -1,14 +1,32 @@
 # Library Imports
-import Tkinter
+
+import json
+import requests
+from keras.models import Sequential
+from keras.layers import Activation, Dense, Dropout, LSTM
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.metrics import mean_absolute_error
+
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVR
 
 # Loading/Reading in the Data
 df = pd.read_csv("BTC-USD.csv")
 
+endpoint = 'https://min-api.cryptocompare.com/data/histoday'
+res = requests.get(endpoint + '?fsym=BTC&tsym=CAD&limit=1700')
+hist = pd.DataFrame(json.loads(res.content)['Data'])
+hist = hist.set_index('time')
+hist.index = pd.to_datetime(hist.index, unit='s')
+target_col = 'close'
+
+print(hist.head(5))
+
+
+'''
 #Remove innecesary columns
 df.drop(['Date'], 1, inplace=True)
 df.drop(['High'], 1, inplace=True)
@@ -78,3 +96,5 @@ df.plot(y='Price',kind='line')
 df.plot(y='Prediction',kind='line')
 
 plt.show()
+
+'''
