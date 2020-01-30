@@ -22,6 +22,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 Functions
 '''
 
+
 #Split 20 test, 80 train
 def train_test_split(df, test_size=0.2):
     split_row = len(df) - int(test_size * len(df))
@@ -34,7 +35,7 @@ def line_plot(line1, line2, label1=None, label2=None, title='', lw=2):
     fig, ax = plt.subplots(1, figsize=(13, 7))
     ax.plot(line1, label=label1, linewidth=lw)
     ax.plot(line2, label=label2, linewidth=lw)
-    ax.set_ylabel('price [CAD]', fontsize=14)
+    ax.set_ylabel('price [EUR]', fontsize=14)
     ax.set_title(title, fontsize=16)
     ax.legend(loc='best', fontsize=16)
 
@@ -97,16 +98,15 @@ optimizer = 'adam'
 # Loading/Reading Data from API, just need close column
 
 url = 'https://min-api.cryptocompare.com/data/histoday'
-res = requests.get(url + '?fsym=BTC&tsym=CAD&limit=1700')
+res = requests.get(url + '?fsym=BTC&tsym=EUR&limit=1500')
 hist = pd.DataFrame(json.loads(res.content)['Data'])
 hist = hist.set_index('time')
 hist.index = pd.to_datetime(hist.index, unit='s')
 target_col = 'close'
 
-#Raw graphic
 
 train, test = train_test_split(hist, test_size=0.2)
-line_plot(train[target_col], test[target_col], 'training', 'test', title='')
+
 
 # Prepare data and building model
 
